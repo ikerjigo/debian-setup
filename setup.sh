@@ -8,10 +8,20 @@ sudo apt install tmux neovim flameshot # Install needed tools and personal prefe
 sudo apt install bind9 dnsutils nmap # Install class packages
 
 cat << EOF
+####################################
+------------------------------------
+EOF
+read -p "Enter last octet of IP:" ip
+cat << EOF
+------------------------------------
+####################################
+EOF
+
+cat << EOF
 
 #############################
 -----------------------------
-Changing IP to 192.168.202.18
+Changing IP to 192.168.202.$ip
 -----------------------------
 #############################
 
@@ -21,7 +31,7 @@ cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
 
 auto eno1
 iface eno1 inet static
-	address 192.168.202.18
+	address 192.168.202.$ip
 	netmask 255.255.0.0
 	gateway 192.168.88.88
 EOF
@@ -38,7 +48,6 @@ Waiting 20 seconds for service to stop
 EOF
 
 sleep 20
-
 
 sudo systemctl start networking
 cat << EOF
