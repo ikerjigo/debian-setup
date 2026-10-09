@@ -11,7 +11,7 @@ cat << EOF
 #
 #
 EOF
-read -p "# Enter last octet of IP:" ip
+read -p "# Enter last octet of IP: " ip
 cat << EOF
 #
 #
