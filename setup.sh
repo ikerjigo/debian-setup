@@ -8,13 +8,13 @@ sudo apt install tmux neovim flameshot # Install needed tools and personal prefe
 sudo apt install bind9 dnsutils nmap # Install class packages
 
 cat << EOF
-####################################
-------------------------------------
+#
+#
 EOF
-read -p "Enter last octet of IP:" ip
+read -p "# Enter last octet of IP:" ip
 cat << EOF
-------------------------------------
-####################################
+#
+#
 EOF
 
 cat << EOF
