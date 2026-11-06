@@ -91,7 +91,12 @@ read -p "Enter zone NS: " ns
 echo "-------------------"
 read -p "Enter admin name: " admN
 
-cat << EOF | sudo tee -a /etc/bind/named.conf.local
+cat > /etc/resolv.conf << EOF
+search $zoneN
+nameserver 192.168.202.$ip
+EOF
+
+cat << EOF | sudo tee -a /etc/bind/named.conf.local > /dev/null
 zone $zoneN {
 	type master;
 	file "/etc/bind/db.$zoneN";
@@ -126,3 +131,5 @@ EOF
 sudo systemctl stop named
 sleep 1
 sudo systemctl start named
+
+nslookup -type=SOA $zoneN
