@@ -109,4 +109,8 @@ $TTL 1w
 	2h;	Negative cache
 )
 
+@	IN	NS	$ns
+$ns	IN	A	192.168.202.$ip
+@	IN	A	192.168.202.$ip
+
 EOF
