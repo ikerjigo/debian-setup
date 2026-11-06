@@ -1,0 +1,112 @@
+#!/bin/bash
+setxkbmap es # Set keyboard to spanish
+
+sudo apt update # Update repos of the ISO, tend to be outdated
+
+sudo apt install tmux neovim flameshot # Install needed tools and personal preference tools
+
+flameshot & # Start flameshot in background
+
+sudo apt install bind9 dnsutils nmap # Install class packages
+
+cat << EOF
+#
+#
+EOF
+read -p "# Enter last octet of IP: " ip
+cat << EOF
+#
+#
+EOF
+
+cat << EOF
+
+#############################
+-----------------------------
+Changing IP to 192.168.202.$ip
+-----------------------------
+#############################
+
+EOF
+
+cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
+
+auto eno1
+iface eno1 inet static
+	address 192.168.202.$ip
+	netmask 255.255.0.0
+	gateway 192.168.88.88
+EOF
+
+sudo systemctl stop networking
+cat << EOF
+
+#######################################
+---------------------------------------
+Waiting 20 seconds for service to stop
+*Sometimes, manual restart is required*
+---------------------------------------
+#######################################
+
+EOF
+
+sleep 20
+
+sudo systemctl start networking
+cat << EOF
+
+######################## 
+------------------------
+Starting network service
+------------------------
+########################
+
+EOF
+
+ip -c a show dev eno1
+
+cat << EOF
+#################
+-----------------
+DNS Config + zone
+-----------------
+#################
+
+EOF
+
+echo "Setting 192.168.88.88 as forwarder"
+
+cat > /etc/bind/named.conf.op/tions << EOF 
+options {
+	directory "/var/cache/bind";
+	forwarders {
+		192.168.88.88;
+	};
+};
+EOF
+
+read -p "Enter zone name: " zoneN
+echo "-------------------"
+read -p "Enter zone NS: " ns
+echo "-------------------"
+read -p "Enter admin name: " admN
+
+cat << EOF | sudo tee -a /etc/bind/named.conf.local
+zone $zoneN {
+	type master;
+	file "/etc/bind/db.$zoneN";
+};
+EOF
+
+cat << EOF | sudo tee -a /etc/bind/db.$zoneN > /dev/null 
+$TTL 1w
+
+@	IN	SOA	$ns	$admN (
+	1;	Serial
+	12h;	Refresh
+	4h;	Retry
+	4d;	Expire
+	2h;	Negative cache
+)
+
+EOF
