@@ -114,3 +114,15 @@ $ns	IN	A	192.168.202.$ip
 @	IN	A	192.168.202.$ip
 
 EOF
+
+cat << EOF
+########################
+------------------------
+Restarting BIND9 service
+------------------------
+########################
+EOF
+
+sudo systemctl stop named
+sleep 1
+sudo systemctl start named
