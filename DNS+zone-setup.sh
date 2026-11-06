@@ -75,8 +75,9 @@ DNS Config + zone
 EOF
 
 echo "Setting 192.168.88.88 as forwarder"
+sleep 2
 
-sudo cat > /etc/bind/named.conf.options << EOF 
+sudo tee /etc/bind/named.conf.options > /dev/null << EOF 
 options {
 	directory "/var/cache/bind";
 	forwarders {
@@ -91,7 +92,7 @@ read -p "Enter zone NS: " ns
 echo "-------------------"
 read -p "Enter admin name: " admN
 
-sudo cat > /etc/resolv.conf << EOF
+sudo tee /etc/resolv.conf > /dev/null << EOF
 search $zoneN
 nameserver 192.168.202.$ip
 EOF
