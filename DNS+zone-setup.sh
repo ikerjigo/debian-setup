@@ -76,7 +76,7 @@ EOF
 
 echo "Setting 192.168.88.88 as forwarder"
 
-cat > /etc/bind/named.conf.op/tions << EOF 
+cat > /etc/bind/named.conf.options << EOF 
 options {
 	directory "/var/cache/bind";
 	forwarders {
@@ -99,7 +99,7 @@ zone $zoneN {
 EOF
 
 cat << EOF | sudo tee -a /etc/bind/db.$zoneN > /dev/null 
-$TTL 1w
+\$TTL 1w
 
 @	IN	SOA	$ns	$admN (
 	1;	Serial
