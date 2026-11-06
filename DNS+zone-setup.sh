@@ -118,6 +118,7 @@ cat << EOF | sudo tee -a /etc/bind/db.$zoneN > /dev/null
 $ns	IN	A	192.168.202.$ip
 @	IN	A	192.168.202.$ip
 
+; REMEMBER TO CHANGE SERIAL AFTER CHANGES
 EOF
 
 cat << EOF
