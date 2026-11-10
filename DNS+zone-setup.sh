@@ -22,49 +22,49 @@ EOF
 if ! [[ "$ip" =~ ^[0-9]+$ ]]; then
 	echo "Not a number. Not changing IP."
 elif [ "$ip" -lt 255 ]; then
-	cat << EOF
-	
-	#############################
-	-----------------------------
-	Changing IP to 192.168.202.$ip
-	-----------------------------
-	#############################
-	
-	EOF
+cat << EOF
 
-	cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
+#############################
+-----------------------------
+Changing IP to 192.168.202.$ip
+-----------------------------
+#############################
 
-	auto eno1
-	iface eno1 inet static
-		address 192.168.202.$ip
-		netmask 255.255.0.0
-		gateway 192.168.88.88
-	EOF
+EOF
 
-	sudo systemctl stop networking
-	cat << EOF
+cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
+
+auto eno1
+iface eno1 inet static
+	address 192.168.202.$ip
+	netmask 255.255.0.0
+	gateway 192.168.88.88
+EOF
+
+sudo systemctl stop networking
+cat << EOF
+
+#######################################
+---------------------------------------
+Waiting 20 seconds for service to stop
+*Sometimes, manual restart is required*
+---------------------------------------
+#######################################
+
+EOF
 	
-	#######################################
-	---------------------------------------
-	Waiting 20 seconds for service to stop
-	*Sometimes, manual restart is required*
-	---------------------------------------
-	#######################################
+sleep 20
 	
-	EOF
+sudo systemctl start networking
+cat << EOF
 	
-	sleep 20
+######################## 
+------------------------
+Starting network service
+------------------------
+########################
 	
-	sudo systemctl start networking
-	cat << EOF
-	
-	######################## 
-	------------------------
-	Starting network service
-	------------------------
-	########################
-	
-	EOF
+EOF
 else 
 	echo "Number not valid (bigger than 254)"
 fi
@@ -100,7 +100,7 @@ read -p "Enter admin name: " admN
 
 sudo tee /etc/resolv.conf > /dev/null << EOF
 search $zoneN
-nameserver 192.168.202.$ip
+nameserver 127.0.0.1
 EOF
 
 cat << EOF | sudo tee -a /etc/bind/named.conf.local > /dev/null
