@@ -19,49 +19,55 @@ cat << EOF
 #
 EOF
 
-cat << EOF
+if ! [[ "$ip" =~ ^[0-9]+$ ]]; then
+	echo "Not a number. Not changing IP."
+elif [ "$ip" -lt 255 ]; then
+	cat << EOF
+	
+	#############################
+	-----------------------------
+	Changing IP to 192.168.202.$ip
+	-----------------------------
+	#############################
+	
+	EOF
 
-#############################
------------------------------
-Changing IP to 192.168.202.$ip
------------------------------
-#############################
+	cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
 
-EOF
+	auto eno1
+	iface eno1 inet static
+		address 192.168.202.$ip
+		netmask 255.255.0.0
+		gateway 192.168.88.88
+	EOF
 
-cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
-
-auto eno1
-iface eno1 inet static
-	address 192.168.202.$ip
-	netmask 255.255.0.0
-	gateway 192.168.88.88
-EOF
-
-sudo systemctl stop networking
-cat << EOF
-
-#######################################
----------------------------------------
-Waiting 20 seconds for service to stop
-*Sometimes, manual restart is required*
----------------------------------------
-#######################################
-
-EOF
-
-sleep 20
-
-sudo systemctl start networking
-cat << EOF
-
-######################## 
-------------------------
-Starting network service
-------------------------
-########################
-
-EOF
+	sudo systemctl stop networking
+	cat << EOF
+	
+	#######################################
+	---------------------------------------
+	Waiting 20 seconds for service to stop
+	*Sometimes, manual restart is required*
+	---------------------------------------
+	#######################################
+	
+	EOF
+	
+	sleep 20
+	
+	sudo systemctl start networking
+	cat << EOF
+	
+	######################## 
+	------------------------
+	Starting network service
+	------------------------
+	########################
+	
+	EOF
+else 
+	echo "Number not valid (bigger than 254)"
+fi
 
 ip -c a show dev eno1
 
