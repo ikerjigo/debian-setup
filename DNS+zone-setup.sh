@@ -3,9 +3,11 @@ setxkbmap es # Set keyboard to spanish
 
 sudo apt update # Update repos of the ISO, tend to be outdated
 
-sudo apt install tmux neovim flameshot # Install needed tools and personal preference tools
+sudo apt install tmux neovim flameshot bat# Install needed tools and personal preference tools
 
 flameshot & # Start flameshot in background
+
+echo "alias cat=batcat" >> ~/.bashrc # Add batcat alias to cat
 
 sudo apt install bind9 dnsutils nmap # Install class packages
 
