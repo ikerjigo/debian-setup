@@ -1,0 +1,38 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f5d7;
+    color: #282828;
+    line-height: 1.6;
+    padding: 40px;
+}
+header {
+    background-color: #f2e5bc;
+    padding: 15px;
+    border-radius: 25px;
+}
+footer {
+    background-color: #f2e5bc;
+    padding: 15px;
+    border-radius: 25px;
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    margin-bottom: 5px;
+}
+
+strong {
+    color: #fb4934;
+}
