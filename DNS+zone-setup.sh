@@ -15,20 +15,22 @@ cat << EOF
 #
 #
 EOF
-read -p "# Enter last octet of IP: " ip
+read -p "# Enter last octet of IP: " n1
 cat << EOF
 #
 #
 EOF
 
-if ! [[ "$ip" =~ ^[0-9]+$ ]]; then
+if ! [[ "$n1" =~ ^[0-9]+$ ]]; then
 	echo "Not a number. Not changing IP."
-elif [ "$ip" -lt 255 ]; then
+	ip=$(hostname -I | awk '{print $1}')
+elif [ "$n1" -lt 255 ]; then
+ip=192.168.202.$n1
 cat << EOF
 
 #############################
 -----------------------------
-Changing IP to 192.168.202.$ip
+Changing IP to $ip
 -----------------------------
 #############################
 
@@ -38,7 +40,7 @@ cat << EOF | sudo tee -a /etc/network/interfaces > /dev/null
 
 auto eno1
 iface eno1 inet static
-	address 192.168.202.$ip
+	address $ip
 	netmask 255.255.0.0
 	gateway 192.168.88.88
 EOF
@@ -102,7 +104,7 @@ read -p "Enter admin name: " admN
 
 sudo tee /etc/resolv.conf > /dev/null << EOF
 search $zoneN
-nameserver 127.0.0.1
+nameserver $ip
 EOF
 
 cat << EOF | sudo tee -a /etc/bind/named.conf.local > /dev/null
@@ -124,8 +126,8 @@ cat << EOF | sudo tee -a /etc/bind/db.$zoneN > /dev/null
 )
 
 @	IN	NS	$ns
-$ns	IN	A	192.168.202.$ip
-@	IN	A	192.168.202.$ip
+$ns	IN	A	$ip
+@	IN	A	$ip
 
 ; REMEMBER TO CHANGE SERIAL AFTER CHANGES
 EOF
