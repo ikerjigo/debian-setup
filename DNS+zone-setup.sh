@@ -76,6 +76,7 @@ fi
 ip -c a show dev eno1
 
 cat << EOF
+
 #################
 -----------------
 DNS Config + zone
@@ -133,11 +134,13 @@ $ns	IN	A	$ip
 EOF
 
 cat << EOF
+
 ########################
 ------------------------
 Restarting BIND9 service
 ------------------------
 ########################
+
 EOF
 
 sudo systemctl stop named
