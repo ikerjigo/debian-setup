@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>192.168.202.18</title>
+    <title>Pàgina d'Iker</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        document.title = window.location.hostname;
+    </script>
 </head>
 <body>
     <header>
-		<h1>Benvinguts a la pàgina d'Iker</h1>
-		<hr>
+	<h1>Benvinguts a la pàgina d'Iker</h1>
+	<hr>
     </header>
     <main>
-		<h2>Aquesta pàgina està allotjada al contenidor extern amb IP <strong>192.168.202.18</strong> amb el servei Apache2</h2>
+	<h2>Aquesta pàgina està allotjada al contenidor extern amb IP <strong>192.168.202.18</strong> amb el servei Apache2</h2>
+	<h2>Virtual Host:</h2>
+	<br>
+	<div id="hostname"></div>
+	<script>
+    	    const hostname = window.location.hostname;
+    	    document.getElementById("hostname").textContent = hostname;
+	</script>
     </main>
     <footer>
-		<h3>Pàgina d'Iker Jiménez</h3>
-		<p>IES Thos i Codine</p>
-		<p>SMX2 G2</p>
-		<p>Curs 2026/27</p>
+	<h3>Pàgina d'Iker Jiménez</h3>
+	<p>IES Thos i Codine</p>
+	<p>SMX2 G2</p>
+	<p>Curs 2026/27</p>
     </footer>
 </body>
 </html>
