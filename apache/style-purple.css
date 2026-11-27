@@ -1,0 +1,82 @@
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #282828;
+    color: #ebdbb2;
+    line-height: 1.6;
+    padding: 40px;
+}
+
+/* Header */
+header {
+    background-color: #3c3836;
+    color: #ebdbb2;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #50404a;
+}
+
+/* Footer */
+footer {
+    background-color: #3c3836;
+    color: #ebdbb2;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid #50404a;
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #b16286;
+    margin-bottom: 8px;
+}
+
+/* Text emphasis */
+strong {
+    color: #d3869b;
+}
+
+/* Links */
+a {
+    color: #b16286;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #d3869b;
+    text-decoration: underline;
+}
+
+/* Selection */
+::selection {
+    background-color: #b16286;
+    color: #282828;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #282828;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b16286;
+    border-radius: 10px;
+}
+
