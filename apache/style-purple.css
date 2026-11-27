@@ -41,3 +41,11 @@ h1, h2, h3 {
 strong {
     color: #689d6a;
 }
+
+#VirtualHost {
+    display: inline-block;
+    padding: 15px;
+    margin-left: 75px;
+    border: solid 1px black;
+    border-radius: 10px;
+}
