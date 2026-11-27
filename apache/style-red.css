@@ -1,4 +1,3 @@
-
 /* Reset */
 * {
     margin: 0;
@@ -40,4 +39,13 @@ h1, h2, h3 {
 
 strong {
     color: #9d0006;
+}
+
+
+#VirtualHost {
+    display: inline-block;
+    padding: 15px;
+    margin-left: 75px;
+    border: solid 1px black;
+    border-radius: 10px;
 }
