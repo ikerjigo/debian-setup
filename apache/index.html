@@ -6,31 +6,33 @@
     <title>Pàgina d'Iker</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        document.title = window.location.hostname + ":" + window.location.port;
+        document.title = window.location.hostname + ":" + (window.location.port || "default");
     </script>
 </head>
 <body>
     <header>
-		<h1>Benvinguts a la pàgina d'Iker</h1>
-		<hr>
+	<h1>Benvinguts a la pàgina d'Iker</h1>
+	<hr>
     </header>
     <main>
-		<h2>Aquesta pàgina està allotjada amb el servei <strong>Apache2</strong>. Heu accedit pel Virtual Host:</h2>
-		<div id="hostname"></div>
-		<div id="port"></div>
-		<script>
-  	 	  const hostname = window.location.hostname;
-  		  const port = window.location.port;
-			
-  	    document.getElementById("hostname").textContent = hostname;
-  	    document.getElementById("port").textContent = "Port: " + (port || "default");
-		</script>
+	<h2>Aquesta pàgina està allotjada amb el servei <strong>Apache2</strong>. Heu accedit pel Virtual Host:</h2>
+	<div id="VirtualHost">
+	  <div id="hostname"></div>
+	  <div id="port"></div>
+	</div>
+	<script>
+   	  const hostname = window.location.hostname;
+  	  const port = window.location.port;
+		
+      	  document.getElementById("hostname").textContent = "Hostneme: " + hostname;
+  	  document.getElementById("port").textContent = "Port: " + (port || "default");
+	</script>
     </main>
     <footer>
-	  <h3>Pàgina d'Iker Jiménez</h3>
-	  <p>IES Thos i Codine</p>
-	  <p>SMX2 G2</p>
-	  <p>Curs 2026/27</p>
+	<h3>Pàgina d'Iker Jiménez</h3>
+	<p>IES Thos i Codine</p>
+	<p>SMX2 G2</p>
+	<p>Curs 2026/27</p>
     </footer>
 </body>
 </html>
